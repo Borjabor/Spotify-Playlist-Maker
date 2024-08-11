@@ -74,7 +74,6 @@ def get_track_uris(track_names):
             print(f"Error searching for {track_name}: {e}")
             not_found_songs.append(track_name)
         
-        # Update progress bar
         progress = int((i + 1) / total_tracks * 100)
         progress_bar['value'] = progress
         processing_window.update_idletasks()
@@ -97,7 +96,6 @@ def validate_date(date_string):
 def on_submit():
     year = entry.get()
     if validate_date(year):
-        # Show processing window
         global processing_window, progress_bar
         processing_window = tk.Toplevel(root)
         processing_window.title("Processing")
@@ -109,19 +107,24 @@ def on_submit():
         progress_bar = ttk.Progressbar(processing_window, mode='determinate', maximum=100)
         progress_bar.pack(pady=10)
         
-        # Run the main function in a separate thread
         threading.Thread(target=main, args=(year,)).start()
     else:
         messagebox.showerror("Invalid Date", "The date is not in the correct format. Please try again.")
         entry.delete(0, tk.END)
+        
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2)
+    y = (screen_height // 2) - (height // 2)
+    window.geometry(f'{width}x{height}+{x}+{y}')
 
     
-# Create the Tkinter window
 root = tk.Tk()
 root.title("Billboard Playlist Creator")
-root.minsize(300, 120)
 
-# Create and place the widgets
+center_window(root, 300, 120)
+
 label = tk.Label(root, text="Enter date to create playlist (YYYY-MM-DD):")
 label.pack(pady=10)
 
@@ -131,7 +134,4 @@ entry.pack(pady=5)
 submit_button = tk.Button(root, text="Submit", command=on_submit)
 submit_button.pack(pady=10)
 
-# Run the Tkinter event loop
 root.mainloop()
-
-#main()
