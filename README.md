@@ -5,6 +5,7 @@ A Python script to create a Spotify playlist from Billboard charts.
 ## Description
 
 This script uses the Spotify Web API through the Spotipy API and BeautifulSoup to scrape the Billboard Hot 100 chart and create a Spotify playlist with the top songs.
+NOTE: you need to setup an app on the Spotify Developer page to use this script
 
 ## Requirements
 
