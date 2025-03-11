@@ -101,6 +101,8 @@ def on_submit():
         processing_window.title("Processing")
         processing_window.geometry("300x100")
         
+        center_window(processing_window, 300, 120)
+        
         label = tk.Label(processing_window, text="Creating playlist, please wait...")
         label.pack(pady=10)
         
